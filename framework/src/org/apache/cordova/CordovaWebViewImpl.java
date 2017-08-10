@@ -355,6 +355,14 @@ public class CordovaWebViewImpl implements CordovaWebView {
             case KeyEvent.KEYCODE_VOLUME_UP:
             case KeyEvent.KEYCODE_BACK:
             case KeyEvent.KEYCODE_MENU:
+            case KeyEvent.KEYCODE_MEDIA_PLAY_PAUSE:
+            case KeyEvent.KEYCODE_MEDIA_PLAY:
+            case KeyEvent.KEYCODE_MEDIA_PAUSE:
+            case KeyEvent.KEYCODE_MEDIA_STOP:
+            case KeyEvent.KEYCODE_MEDIA_FAST_FORWARD:
+            case KeyEvent.KEYCODE_MEDIA_REWIND:
+            case KeyEvent.KEYCODE_CHANNEL_UP:
+            case KeyEvent.KEYCODE_CHANNEL_DOWN:
                 // TODO: Why are search and menu buttons handled separately?
                 if (override) {
                     boundKeyCodes.add(keyCode);
@@ -583,7 +591,32 @@ public class CordovaWebViewImpl implements CordovaWebView {
                         case KeyEvent.KEYCODE_BACK:
                             eventName = "backbutton";
                             break;
+                        case KeyEvent.KEYCODE_MEDIA_PLAY_PAUSE:
+                            eventName = "mediaplaypausebutton";
+                            break;
+                        case KeyEvent.KEYCODE_MEDIA_PLAY:
+                            eventName = "mediaplaybutton";
+                            break;
+                        case KeyEvent.KEYCODE_MEDIA_PAUSE:
+                            eventName = "mediapausebutton";
+                            break;
+                        case KeyEvent.KEYCODE_MEDIA_STOP:
+                            eventName = "mediastopbutton";
+                            break;
+                        case KeyEvent.KEYCODE_MEDIA_FAST_FORWARD:
+                            eventName = "mediafastforwardbutton";
+                            break;
+                        case KeyEvent.KEYCODE_MEDIA_REWIND:
+                            eventName = "mediarewindbutton";
+                            break;
+                        case KeyEvent.KEYCODE_CHANNEL_UP:
+                            eventName = "channelupbutton";
+                            break;
+                        case KeyEvent.KEYCODE_CHANNEL_DOWN:
+                            eventName = "channeldownbutton";
+                            break;
                     }
+                    LOG.i(TAG, "onDispatchKeyEvent keyCode: " + keyCode + " to eventName: " + eventName);
                     if (eventName != null) {
                         sendJavascriptEvent(eventName);
                         return true;
