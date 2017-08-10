@@ -246,7 +246,7 @@ public class CoreAndroid extends CordovaPlugin {
      * @param override      T=override, F=cancel override
      */
     public void overrideButton(String button, boolean override) {
-        LOG.i("App", "WARNING: Volume Button Default Behavior will be overridden.  The volume event will be fired!");
+        LOG.i("App", "WARNING: Button Default Behavior will be overridden.  The [" + button + "] event will be fired!");
         if (button.equals("volumeup")) {
             webView.setButtonPlumbedToJs(KeyEvent.KEYCODE_VOLUME_UP, override);
         }
@@ -255,6 +255,30 @@ public class CoreAndroid extends CordovaPlugin {
         }
         else if (button.equals("menubutton")) {
             webView.setButtonPlumbedToJs(KeyEvent.KEYCODE_MENU, override);
+        }
+        else if (button.equals("mediaplaypause")) {
+            webView.setButtonPlumbedToJs(KeyEvent.KEYCODE_MEDIA_PLAY_PAUSE, override);
+        }
+        else if (button.equals("mediaplay")) {
+            webView.setButtonPlumbedToJs(KeyEvent.KEYCODE_MEDIA_PLAY, override);
+        }
+        else if (button.equals("mediapause")) {
+            webView.setButtonPlumbedToJs(KeyEvent.KEYCODE_MEDIA_PAUSE, override);
+        }
+        else if (button.equals("mediastop")) {
+            webView.setButtonPlumbedToJs(KeyEvent.KEYCODE_MEDIA_STOP, override);
+        }
+        else if (button.equals("mediafastforward")) {
+            webView.setButtonPlumbedToJs(KeyEvent.KEYCODE_MEDIA_FAST_FORWARD, override);
+        }
+        else if (button.equals("mediarewind")) {
+            webView.setButtonPlumbedToJs(KeyEvent.KEYCODE_MEDIA_REWIND, override);
+        }
+        else if (button.equals("channelup")) {
+            webView.setButtonPlumbedToJs(KeyEvent.KEYCODE_CHANNEL_UP, override);
+        }
+        else if (button.equals("channeldown")) {
+            webView.setButtonPlumbedToJs(KeyEvent.KEYCODE_CHANNEL_DOWN, override);
         }
     }
 
@@ -327,6 +351,7 @@ public class CoreAndroid extends CordovaPlugin {
     private void sendEventMessage(PluginResult payload) {
         payload.setKeepCallback(true);
         if (messageChannel != null) {
+            LOG.i(TAG, "sendEventMessage");
             messageChannel.sendPluginResult(payload);
         }
     }
