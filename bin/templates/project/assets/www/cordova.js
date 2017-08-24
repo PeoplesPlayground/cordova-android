@@ -1662,7 +1662,7 @@ module.exports = {
             cordova = require('cordova'),
             exec = require('cordova/exec'),
             modulemapper = require('cordova/modulemapper');
-
+        
         // Get the shared secret needed to use the bridge.
         exec.init();
 
@@ -1693,6 +1693,15 @@ module.exports = {
         // Inject a listener for the volume buttons on the document.
         bindButtonChannel('volumeup');
         bindButtonChannel('volumedown');
+        // Inject listeners for the media key events
+        bindButtonChannel('mediaplaypause');
+        bindButtonChannel('mediaplay');
+        bindButtonChannel('mediapause');
+        bindButtonChannel('mediastop');
+        bindButtonChannel('mediafastforward');
+        bindButtonChannel('mediarewind');
+        bindButtonChannel('channelup');
+        bindButtonChannel('channeldown');
 
         // The resume event is not "sticky", but it is possible that the event
         // will contain the result of a plugin call. We need to ensure that the
@@ -1731,6 +1740,15 @@ function onMessageFromNative(msg) {
         // Volume events
         case 'volumedownbutton':
         case 'volumeupbutton':
+        // media keys
+        case 'mediaplaypausebutton':
+        case 'mediaplaybutton':
+        case 'mediapausebutton':
+        case 'mediastopbutton':
+        case 'mediafastforwardbutton':
+        case 'mediarewindbutton':
+        case 'channelupbutton':
+        case 'channeldownbutton':
             cordova.fireDocumentEvent(action);
             break;
         case 'resume':
